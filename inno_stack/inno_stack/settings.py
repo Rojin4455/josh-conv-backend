@@ -33,6 +33,11 @@ DEBUG = config('DEBUG')
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
+    '44.204.191.17',
+    'ghltech.com',
+    'api.ghltech.com',
+    'www.ghltech.com',
+    'www.api.ghltech.com',
 ]
 
 
