@@ -91,6 +91,7 @@ WSGI_APPLICATION = 'inno_stack.wsgi.application'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     'https://app.gohighlevel.com'
+    'https://main.d1t76lbau9bvvj.amplifyapp.com'
 ]
 
 CORS_ALLOW_CREDENTIALS = True
