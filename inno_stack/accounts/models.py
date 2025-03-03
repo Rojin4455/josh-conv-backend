@@ -9,8 +9,11 @@ class AuthCredential(models.Model):
     token_type = models.CharField(max_length=50)
     user_id = models.CharField(max_length=50)
     user_type = models.CharField(max_length=50)
+    account_name = models.CharField(max_length=250, default="")
+    is_blocked = models.BooleanField(default=False)
     expires_at = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
+    
 
     def __str__(self):
         return f"{self.user_id} - {self.token_type}"

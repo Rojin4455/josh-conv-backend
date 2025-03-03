@@ -5,6 +5,9 @@ from rest_framework.permissions import AllowAny
 from .serializers import *
 from rest_framework.response import Response
 import requests
+from django.shortcuts import get_object_or_404
+from rest_framework import status
+
 
 class AuthCredentialCreateView(generics.CreateAPIView):
     queryset = AuthCredential.objects.all()
@@ -32,6 +35,8 @@ class ConversationView(APIView):
         
         try:
             credentials = AuthCredential.objects.get(location_id=location_id)
+            if credentials.is_blocked:
+                return Response({'error': 'Currently the Location is Blocked'}, status=400)
             access_token = credentials.access_token
             
             url = "https://services.leadconnectorhq.com/conversations/search"
@@ -61,3 +66,24 @@ class ConversationView(APIView):
         except requests.exceptions.RequestException as e:
             print("Error in API call:", str(e))
             return Response({'error': str(e)}, status=500)
+        
+class LocationsView(generics.ListAPIView):
+    queryset = AuthCredential.objects.all()
+    serializer_class = AuthCredentialSerializer
+    permission_classes = [AllowAny]
+
+
+class LocationStatusUpdateView(APIView):
+    permission_classes = [AllowAny]
+
+    def put(self, request, location_id, stat):
+        print("hererer")
+        print("Status:L ",stat)
+        location = get_object_or_404(AuthCredential, id=location_id)
+        location.is_blocked = True if stat == "true" else False
+        location.save()
+
+        return Response(
+            {"message": "Location status updated successfully", "location": AuthCredentialSerializer(location).data},
+            status=status.HTTP_200_OK
+        )
