@@ -66,6 +66,11 @@ class ConversationView(APIView):
         if not location_id:
             return Response({'error': 'Location ID is required'}, status=400)
         
+        try:
+            location = AuthCredential.objects.get(location_id=location_id)
+        except AuthCredential.DoesNotExist:
+            return Response({'error': "location is not onboarded"}, status=400)
+            
         global_cache_key = f"ghl_unread_messages:{location_id}"
         
         try:
@@ -75,7 +80,7 @@ class ConversationView(APIView):
             if not cached_data or self.is_cache_expired(cached_data):
                 print("reached here cached_data and it not expired:", cached_data, self.is_cache_expired(cached_data))
                 lock_key = f"{global_cache_key}_lock"
-                lock_acquired = cache.add(lock_key, True, 30)  # 30-second lock
+                lock_acquired = cache.add(lock_key, True, 30)
                 
                 if lock_acquired:
                     try:
@@ -120,6 +125,8 @@ class ConversationView(APIView):
         print("ghl api called")
         try:
             credentials = AuthCredential.objects.get(location_id=location_id)
+            if credentials.is_blocked:
+                raise ValueError(f"Location Is Blocked For conversation Unread count")
             access_token = credentials.access_token
             
             url = "https://services.leadconnectorhq.com/conversations/search"
