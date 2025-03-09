@@ -92,6 +92,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     'https://app.gohighlevel.com',
     'https://main.d1t76lbau9bvvj.amplifyapp.com',
+    'https://app.ghltech.com',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
