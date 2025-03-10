@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from .serializers import *
 from rest_framework.response import Response
 import requests
@@ -10,6 +10,10 @@ from rest_framework import status
 from django.core.cache import cache
 from django.utils import timezone
 import logging
+from django.contrib.auth import authenticate, login, logout
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+
+
 
 
 class AuthCredentialCreateView(generics.CreateAPIView):
@@ -34,8 +38,8 @@ class AuthCredentialCreateView(generics.CreateAPIView):
 class LocationsView(generics.ListAPIView):
     queryset = AuthCredential.objects.all()
     serializer_class = AuthCredentialSerializer
-    permission_classes = [AllowAny]
-
+    authentication_classes = [SessionAuthentication, BasicAuthentication]  # Enables session-based auth
+    permission_classes = [IsAuthenticated]
 
 class LocationStatusUpdateView(APIView):
     permission_classes = [AllowAny]
@@ -152,3 +156,43 @@ class ConversationView(APIView):
             raise ValueError('Credentials not found for this location')
         except requests.exceptions.RequestException as e:
             raise ValueError(f"Error in GHL API call: {str(e)}")
+        
+
+
+class LoginView(APIView):
+    def post(self, request):
+        print("request.data ;", request.data)
+        email = request.data['data'].get("email")
+        password = request.data['data'].get("password")
+
+        if not email or not password:
+            return Response({"error": "Email and password are required."}, status=status.HTTP_400_BAD_REQUEST)
+
+        user = authenticate(request, username=email, password=password)
+
+        if user is None:
+            return Response({"error": "Invalid credentials."}, status=status.HTTP_401_UNAUTHORIZED)
+
+        if not user.is_staff:
+            return Response({"error": "Access denied. Admin only."}, status=status.HTTP_403_FORBIDDEN)
+
+        login(request, user)
+        return Response({"message": "Login successful.", "user_id": user.id, "email":user.email}, status=status.HTTP_200_OK)
+    
+
+
+class CheckAuthView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response({"is_authenticated": True, "user": request.user.username})
+    
+
+
+class LogoutView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        logout(request)
+
+        return Response(status=status.HTTP_200_OK)
