@@ -34,10 +34,8 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     '44.204.191.17',
-    'ghltech.com',
-    'api.ghltech.com',
-    'www.ghltech.com',
-    'www.api.ghltech.com',
+    'api.kicknsaas.com', 
+    'www.api.kicknsaas.com'
 ]
 
 
@@ -104,7 +102,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     'https://app.gohighlevel.com',
     'https://main.d1t76lbau9bvvj.amplifyapp.com',
-    'https://app.ghltech.com',
+    'https://app.kicknsaas.com',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
