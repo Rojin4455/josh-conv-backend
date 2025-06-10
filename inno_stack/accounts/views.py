@@ -89,7 +89,7 @@ class ConversationView(APIView):
                 if lock_acquired:
                     try:
                         new_data = self.fetch_ghl_unread_messages(location_id)
-                        
+                        print("new data: ", new_data)
                         # Cache the new data for 1 minute
                         cache.set(global_cache_key, new_data, 60)
                     except Exception as e:

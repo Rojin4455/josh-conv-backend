@@ -35,7 +35,9 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '44.204.191.17',
     'api.kicknsaas.com', 
-    'www.api.kicknsaas.com'
+    'www.api.kicknsaas.com',
+    'a923-223-181-8-179.ngrok-free.app'
+    
 ]
 
 
@@ -99,10 +101,11 @@ WSGI_APPLICATION = 'inno_stack.wsgi.application'
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    'https://app.gohighlevel.com',
-    'https://main.d1t76lbau9bvvj.amplifyapp.com',
-    'https://app.kicknsaas.com',
+    # "http://localhost:3000",
+    # 'https://app.gohighlevel.com',
+    # 'https://main.d1t76lbau9bvvj.amplifyapp.com',
+    # 'https://app.kicknsaas.com',
+    "*"
 ]
 
 CORS_ALLOW_CREDENTIALS = True
