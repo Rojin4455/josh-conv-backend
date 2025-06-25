@@ -92,6 +92,9 @@ WSGI_APPLICATION = 'inno_stack.wsgi.application'
 
 CORS_ALLOW_CREDENTIALS = True
 
+CORS_ALLOW_ALL_HEADERS = True
+
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     'https://app.gohighlevel.com',
