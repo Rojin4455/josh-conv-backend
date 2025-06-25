@@ -98,31 +98,31 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'inno_stack.wsgi.application'
 
-# CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_CREDENTIALS = True
 
-# CORS_ALLOWED_ORIGINS = [
-#     # "http://localhost:3000",
-#     # 'https://app.gohighlevel.com',
-#     # 'https://main.d1t76lbau9bvvj.amplifyapp.com',
-#     # 'https://app.kicknsaas.com',
-#     "*"
-# ]
-
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = False
-
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-    'cache-control',
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    'https://app.gohighlevel.com',
+    'https://main.d1t76lbau9bvvj.amplifyapp.com',
+    'https://app.kicknsaas.com',
+    # "*"
 ]
+
+# CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_CREDENTIALS = False
+
+# CORS_ALLOW_HEADERS = [
+#     'accept',
+#     'accept-encoding',
+#     'authorization',
+#     'content-type',
+#     'dnt',
+#     'origin',
+#     'user-agent',
+#     'x-csrftoken',
+#     'x-requested-with',
+#     'cache-control',
+# ]
 
 
 # Database
