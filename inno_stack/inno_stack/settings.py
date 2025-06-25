@@ -95,7 +95,8 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     'https://app.gohighlevel.com',
-    'https://notifications.trysaasyway.com'
+    'https://notifications.trysaasyway.com',
+    "https://josh-conv-frontend.vercel.app"
     # "*"
 ]
 
