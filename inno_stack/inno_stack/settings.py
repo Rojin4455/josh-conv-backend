@@ -103,7 +103,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     'https://app.gohighlevel.com',
     'https://notifications.trysaasyway.com',
-    "https://josh-conv-frontend.vercel.app"
+    "https://josh-conv-frontend.vercel.app",
+    "http://3.86.145.131"
     # "*"
 ]
 
