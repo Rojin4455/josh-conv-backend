@@ -30,12 +30,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    '3.83.127.68',
-    'notifications.trysaasyway.com'
-]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
