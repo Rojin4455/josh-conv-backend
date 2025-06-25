@@ -92,8 +92,12 @@ WSGI_APPLICATION = 'inno_stack.wsgi.application'
 
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOW_ALL_HEADERS = True
 
+from corsheaders.defaults import default_headers
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    "cache-control",
+]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
