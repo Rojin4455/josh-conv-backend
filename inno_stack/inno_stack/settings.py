@@ -33,11 +33,8 @@ DEBUG = config('DEBUG')
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    '44.204.191.17',
-    'api.kicknsaas.com', 
-    'www.api.kicknsaas.com',
-    'a923-223-181-8-179.ngrok-free.app'
-    
+    '3.83.127.68',
+    'notifications.trysaasyway.com'
 ]
 
 
@@ -103,8 +100,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     'https://app.gohighlevel.com',
-    'https://main.d1t76lbau9bvvj.amplifyapp.com',
-    'https://app.kicknsaas.com',
+    'https://notifications.trysaasyway.com'
     # "*"
 ]
 
